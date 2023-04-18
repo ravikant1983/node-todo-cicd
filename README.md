@@ -13,4 +13,4 @@ Run these commands:
 
 `node app.js`
 
-or Run by docker compose file1
+or Run by docker compose file2
