@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'dev-agent' }
+    agent { label 'agent-1' }
     
     stages{
         stage('Code'){
@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build and Test'){
             steps {
-                sh 'docker build . -t rkg1983/node-todo-app-cicd:latest' 
+                sh 'docker build . -t rkg1983/node-todo-app:latest' 
             }
         }
         stage('Login and Push Image'){
@@ -17,7 +17,7 @@ pipeline {
                 echo 'logging in to docker hub and pushing image..'
                 withCredentials([usernamePassword(credentialsId:'dockerHub',passwordVariable:'dockerHubPassword', usernameVariable:'dockerHubUser')]) {
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh "docker push rkg1983/node-todo-app-cicd:latest"
+                    sh "docker push rkg1983/node-todo-app:latest"
                 }
             }
         }
